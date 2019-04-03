@@ -69,5 +69,17 @@ class ModuleTest extends ModuleTestCase
         $character = $this->getEntityManager()->getRepository(Character::class)->find("10000000-0000-0000-0000-000000000001");
 
         $charstats = new CharacterStats($this->g, $character);
+
+        $i = 0;
+        $j = 0;
+        foreach ($charstats->iterate() as $group) {
+            $i++;
+            foreach ($group->iterate() as $stat) {
+                $j++;
+            }
+        }
+
+        $this->assertSame(2, $i);
+        $this->assertSame(3, $j);
     }
 }
