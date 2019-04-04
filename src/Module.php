@@ -36,15 +36,19 @@ class Module implements ModuleInterface {
                 ),
             ];
 
-            foreach ($vitalStats as $stat) {
-                $groups["vital"]->addCharacterStat($stat);
+            $additionalStats = [];
+
+            if ($g->getModuleManager()->getModule("lotgd/module-res-fight")) {
+                $vitalStats[] = new BaseCharacterStat(
+                    "lotgd/res/charstats/vitalInfo/rounds", "Rounds", $character->getTurns(), 300
+                );
+                $additionalStats[] = new BaseCharacterStat(
+                    "lotgd/res/charstats/additionalInfo/experience", "Experience", $character->getCurrentExperience(), 100
+                );
             }
 
-            $additionalStats = [];
-            if ($g->getModuleManager()->getModule("lotgd/module-res-fight")) {
-                $additionalStats[] = new BaseCharacterStat(
-                    "lotgd/res/charstats/additionalInfo/experience", $character->getExperience(), 100
-                );
+            foreach ($vitalStats as $stat) {
+                $groups["vital"]->addCharacterStat($stat);
             }
 
             foreach ($additionalStats as $stat) {
