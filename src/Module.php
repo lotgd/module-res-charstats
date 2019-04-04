@@ -11,6 +11,7 @@ use LotGD\Core\Models\CharacterStats\BaseCharacterStat;
 use LotGD\Core\Models\CharacterStats;
 use LotGD\Core\Module as ModuleInterface;
 use LotGD\Core\Models\Module as ModuleModel;
+use LotGD\Module\Res\Charstats\CharacterStats\ProgressBarCharacterStat;
 
 class Module implements ModuleInterface {
     public static function handleEvent(Game $g, EventContext $context): EventContext
@@ -31,8 +32,10 @@ class Module implements ModuleInterface {
                     "lotgd/res/charstats/vitalInfo/name", "Name", $character->getDisplayName(), 0
                 ), new BaseCharacterStat(
                     "lotgd/res/charstats/vitalInfo/alive", "Alive", $character->isAlive() ? "Yes" : "No", 100
-                ), new BaseCharacterStat(
-                    "lotgd/res/charstats/vitalInfo/health", "Health", $character->getHealth(), 200
+                ), new ProgressBarCharacterStat(
+                    "lotgd/res/charstats/vitalInfo/health", "Health", $character->getHealth(), 200, [
+                        "max" => $character->getMaxHealth()
+                    ]
                 ),
             ];
 
