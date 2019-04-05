@@ -41,10 +41,10 @@ class Module implements ModuleInterface {
                         ]
                 ), new BaseCharacterStat(
                     "lotgd/res/charstats/vitalInfo/attack",
-                    "Alive", $character->getAttack(), 100
+                    "Attack", $character->getAttack(), 300
                 ), new BaseCharacterStat(
                     "lotgd/res/charstats/vitalInfo/defense",
-                    "Alive", $character->getDefense(), 100
+                    "Defense", $character->getDefense(), 400
                 ),
             ];
 
