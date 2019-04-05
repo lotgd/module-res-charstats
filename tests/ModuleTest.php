@@ -80,6 +80,6 @@ class ModuleTest extends ModuleTestCase
         }
 
         $this->assertSame(2, $i);
-        $this->assertSame(3, $j);
+        $this->assertSame(5, $j);
     }
 }

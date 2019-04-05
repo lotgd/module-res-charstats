@@ -29,13 +29,22 @@ class Module implements ModuleInterface {
 
             $vitalStats = [
                 new BaseCharacterStat(
-                    "lotgd/res/charstats/vitalInfo/name", "Name", $character->getDisplayName(), 0
+                    "lotgd/res/charstats/vitalInfo/name",
+                    "Name", $character->getDisplayName(), 0
                 ), new BaseCharacterStat(
-                    "lotgd/res/charstats/vitalInfo/alive", "Alive", $character->isAlive() ? "Yes" : "No", 100
+                    "lotgd/res/charstats/vitalInfo/alive",
+                    "Alive", $character->isAlive() ? "Yes" : "No", 100
                 ), new ProgressBarCharacterStat(
-                    "lotgd/res/charstats/vitalInfo/health", "Health", $character->getHealth(), 200, [
-                        "max" => $character->getMaxHealth()
-                    ]
+                    "lotgd/res/charstats/vitalInfo/health",
+                    "Health", $character->getHealth(), 200, [
+                            "max" => $character->getMaxHealth()
+                        ]
+                ), new BaseCharacterStat(
+                    "lotgd/res/charstats/vitalInfo/attack",
+                    "Alive", $character->getAttack(), 100
+                ), new BaseCharacterStat(
+                    "lotgd/res/charstats/vitalInfo/defense",
+                    "Alive", $character->getDefense(), 100
                 ),
             ];
 
@@ -45,8 +54,11 @@ class Module implements ModuleInterface {
                 $vitalStats[] = new BaseCharacterStat(
                     "lotgd/res/charstats/vitalInfo/rounds", "Rounds", $character->getTurns(), 300
                 );
-                $additionalStats[] = new BaseCharacterStat(
-                    "lotgd/res/charstats/additionalInfo/experience", "Experience", $character->getCurrentExperience(), 100
+                $additionalStats[] = new ProgressBarCharacterStat(
+                    "lotgd/res/charstats/additionalInfo/experience",
+                    "Experience", $character->getCurrentExperience(), 100, [
+                            "max" => $character->getRequiredExperience()
+                        ]
                 );
             }
 
