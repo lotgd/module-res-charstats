@@ -36,12 +36,7 @@ class ModuleTest extends ModuleTestCase
             'characters', 'scenes', "event_subscriptions"
         ];
 
-        $after = $this->getConnection()->createDataSet($tableList);
-        $before = $this->getDataSet();
-
-        foreach($tableList as $table) {
-            $this->assertSame($before->getTable($table)->getRowCount(), $after->getTable($table)->getRowCount());
-        }
+        $this->assertDataWasKeptIntact($this->getDataSet(), $this->getConnection()[0], $tableList);
 
         // Since tearDown() contains an onUnregister() call, this also tests
         // double-unregistering, which should be properly supported by modules.
@@ -61,7 +56,10 @@ class ModuleTest extends ModuleTestCase
         $character = $this->getEntityManager()->getRepository(Character::class)->find("10000000-0000-0000-0000-000000000001");
         $game->setCharacter($character);
 
-        Module::handleEvent($this->g, $context);
+        $otherContext = Module::handleEvent($this->g, $context);
+
+        $this->assertSame($context, $otherContext);
+        $this->addToAssertionCount(1);
     }
 
     public function testSomething()
