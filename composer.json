@@ -2,7 +2,7 @@
     "name": "lotgd/module-res-charstats",
     "description": "This module adds basic stats to the default character stats of lotgd/core",
     "type": "lotgd-module",
-    "license": "AGPL-3.0",
+    "license": "AGPL-3.0-or-later",
     "authors": [
         {
             "name": "Basilius Sauter",
@@ -16,10 +16,13 @@
         }
     },
     "repositories": [
-        {"type": "path", "url": "../*"}
+        {
+            "type": "composer",
+            "url": "https://raw.githubusercontent.com/lotgd/packages/master/build/packages.json"
+        }
     ],
     "require": {
-        "lotgd/core": "*"
+        "lotgd/core": "^0.6.0-alpha"
     },
     "require-dev": {
         "phpunit/phpunit": "^9.0",
